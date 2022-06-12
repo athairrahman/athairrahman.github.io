@@ -41,7 +41,9 @@ operators.forEach((operator) => {
 })
 
 const inputOperator = (operator) => {
-    prevNumber = currentNumber
+    if (calculationOperator === '') {
+        prevNumber = currentNumber    
+    }
     calculationOperator = operator
     currentNumber = ''
 }
@@ -62,13 +64,13 @@ const calculate = () => {
             result = parseFloat(prevNumber) + parseFloat(currentNumber)
             break
         case '-':
-            result = parseInt(prevNumber) - parseInt(currentNumber)
+            result = prevNumber - currentNumber
             break
         case '*':
-            result = parseInt(prevNumber) * parseInt(currentNumber)
+            result = prevNumber * currentNumber
             break
         case '/':
-            result = parseInt(prevNumber) / parseInt(currentNumber)
+            result = prevNumber / currentNumber
             break
         default:
             return
@@ -96,6 +98,10 @@ clearBtn.addEventListener('click', () => {
 const decimal = document.querySelector('.decimal')
 
 inputDecimal = (dot) => {
+    //Mencegah peng-inputan titik desimal berulang kali
+    if (currentNumber.includes('.')) {
+        return
+    } 
     currentNumber += dot
 }
 
